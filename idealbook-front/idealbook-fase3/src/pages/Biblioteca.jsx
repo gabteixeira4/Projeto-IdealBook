@@ -8,7 +8,7 @@ function Biblioteca({ irPara, usuario, buscaInicial }) {
 
   const todos = pegarLivrosPublicados();
 
-  // lista de gêneros pro filtro (sem repetir)
+ 
   const generos = ['Todos'];
   todos.forEach((l) => {
     if (!generos.includes(l.genero)) {
@@ -16,7 +16,7 @@ function Biblioteca({ irPara, usuario, buscaInicial }) {
     }
   });
 
-  // filtra por título/autor e por gênero
+ 
   const encontrados = todos.filter((l) => {
     const texto = (l.titulo + ' ' + l.autor).toLowerCase();
     const bateBusca = texto.includes(busca.toLowerCase().trim());

@@ -4,7 +4,7 @@ import { pegarHistorico, acharLivro, podeVerLivro } from '../storage.js';
 function Historico({ usuario, irPara }) {
   const historico = pegarHistorico(usuario.email);
 
-  // junta cada item do histórico com os dados do livro
+ 
   const itens = [];
   historico.forEach((h) => {
     const livro = acharLivro(h.livroId);

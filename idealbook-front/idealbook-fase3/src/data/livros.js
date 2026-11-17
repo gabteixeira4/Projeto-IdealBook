@@ -1,7 +1,3 @@
-// Livros que já vêm na biblioteca.
-// "isbns" é usado pra buscar a capa no Open Library (covers.openlibrary.org).
-// Se a capa não carregar, o componente Capa mostra uma capa colorida no lugar.
-// Os textos dos capítulos são resumos de demonstração feitos pelo grupo.
 
 const livros = [
   {

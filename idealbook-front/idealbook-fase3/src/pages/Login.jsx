@@ -15,7 +15,7 @@ function Login({ irPara, entrar, aviso }) {
       return;
     }
 
-    // procura o usuário na lista de cadastrados
+    
     const usuarios = ler('ib_usuarios', []);
     const achado = usuarios.find(
       (u) => u.email === email.trim().toLowerCase() && u.senha === senha

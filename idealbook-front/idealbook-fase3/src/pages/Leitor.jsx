@@ -8,21 +8,19 @@ import {
   alternarSalvo,
 } from '../storage.js';
 
-// Tela de leitura. Segue o diagrama de atividades:
-// selecionar livro -> carregar livro -> (deu erro? exibe erro) -> exibir conteúdo
-// -> ler -> avançar página/rolar -> terminou a leitura?
+
 function Leitor({ livroId, usuario, irPara }) {
   const [livro, setLivro] = useState(null);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState(false);
   const [cap, setCap] = useState(0);
-  const [modo, setModo] = useState('paginas'); // 'paginas' ou 'rolagem'
+  const [modo, setModo] = useState('paginas'); 
   const [tamanho, setTamanho] = useState(18);
   const [terminou, setTerminou] = useState(false);
   const [salvo, setSalvo] = useState(false);
   const [tentativaCarga, setTentativaCarga] = useState(0);
 
-  // carrega o livro (o setTimeout só simula o tempo de carregar do servidor)
+ 
   useEffect(() => {
     setCarregando(true);
     setErro(false);
@@ -32,7 +30,7 @@ function Leitor({ livroId, usuario, irPara }) {
     const timer = setTimeout(() => {
       const achado = acharLivro(livroId);
 
-      // livro de autor que ainda não foi publicado só pode ser lido pelo próprio autor
+    
       let podeLer = true;
       if (achado && achado.autorEmail && !achado.publicado) {
         podeLer = usuario && usuario.email === achado.autorEmail;
@@ -44,7 +42,7 @@ function Leitor({ livroId, usuario, irPara }) {
         setLivro(achado);
         let inicio = 0;
         if (usuario) {
-          // volta pro capítulo onde a pessoa parou
+      
           const anterior = pegarHistorico(usuario.email).find((h) => h.livroId === livroId);
           if (anterior && anterior.capitulo < achado.capitulos.length) {
             inicio = anterior.capitulo;
@@ -59,7 +57,7 @@ function Leitor({ livroId, usuario, irPara }) {
     return () => clearTimeout(timer);
   }, [livroId, tentativaCarga]);
 
-  // sempre que muda de capítulo, registra no histórico
+ 
   useEffect(() => {
     if (livro && usuario) {
       registrarLeitura(usuario.email, livro.id, cap);

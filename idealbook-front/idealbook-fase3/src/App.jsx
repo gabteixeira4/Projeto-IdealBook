@@ -30,10 +30,10 @@ const titulos = {
   contato: 'Ideal Book — Contato',
 };
 
-// páginas que qualquer visitante pode abrir (sem conta)
+
 const paginasPublicas = ['cadastro', 'login', 'recuperar', 'sobre', 'contato'];
 
-// páginas só para quem se cadastrou como ESCRITOR
+
 const paginasDeEscritor = ['escrever', 'editor'];
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
     const guardado = ler('ib_logado', null);
     return guardado ? normalizarUsuario(guardado) : null;
   });
-  // a primeira página do site é sempre o cadastro (quem já está logado vai para a home)
+ 
   const [pagina, setPagina] = useState(usuario ? 'home' : 'cadastro');
   const [livroId, setLivroId] = useState(null);
   const [busca, setBusca] = useState('');
@@ -50,7 +50,7 @@ function App() {
     document.title = titulos[pagina];
   }, [pagina]);
 
-  // função usada por todas as páginas pra trocar de tela
+ 
   function irPara(nome, id, textoBusca) {
     setPagina(nome);
     setLivroId(id || null);
@@ -71,7 +71,7 @@ function App() {
   }
 
   function mostrarPagina() {
-    // sem conta: só cadastro, login, recuperar senha, sobre e contato
+  
     if (!usuario && !paginasPublicas.includes(pagina)) {
       return (
         <Cadastro
@@ -82,7 +82,7 @@ function App() {
       );
     }
 
-    // leitor não escreve: a área de escrita é só do escritor
+   
     if (paginasDeEscritor.includes(pagina) && !ehEscritor(usuario)) {
       return (
         <main className="pagina">

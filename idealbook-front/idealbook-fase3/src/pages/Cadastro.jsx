@@ -4,7 +4,7 @@ import { ler, gravar } from '../storage.js';
 
 const REGEX_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// os dois tipos de conta
+
 const papeis = [
   {
     id: 'leitor',
@@ -20,7 +20,7 @@ const papeis = [
   },
 ];
 
-// Primeira página do site: aqui a pessoa escolhe se é leitor ou escritor
+
 function Cadastro({ irPara, entrar, aviso }) {
   const [papel, setPapel] = useState('');
   const [nome, setNome] = useState('');
@@ -61,13 +61,13 @@ function Cadastro({ irPara, entrar, aviso }) {
       return;
     }
 
-    // salva o usuário no "sistema" (localStorage por enquanto), já com o papel escolhido
+  
     const usuarios = ler('ib_usuarios', []);
     const novo = { nome: nome.trim(), email: email.trim().toLowerCase(), senha: senha, papel: papel };
     usuarios.push(novo);
     gravar('ib_usuarios', usuarios);
 
-    // já deixa a pessoa logada
+  
     entrar({ nome: novo.nome, email: novo.email, papel: novo.papel });
     irPara('home');
   }

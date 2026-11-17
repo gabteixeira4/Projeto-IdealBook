@@ -1,18 +1,16 @@
-// Capas aleatórias para os livros escritos pelos usuários.
-// A capa é sorteada UMA vez (quando o livro é criado) e guardada como "capaSeed".
-// Com a mesma seed o desenho sai sempre igual, então a capa não muda a cada abertura.
+
 
 const paletas = [
-  ['#7c3aed', '#4c1d95'], // violeta
-  ['#a855f7', '#581c87'], // roxo vivo
-  ['#c026d3', '#6b21a8'], // magenta
-  ['#6366f1', '#3730a3'], // índigo
-  ['#8b5cf6', '#2e1065'], // lavanda escuro
-  ['#d946ef', '#7e22ce'], // fúcsia
-  ['#9333ea', '#312e81'], // roxo-azulado
-  ['#ec4899', '#6d28d9'], // rosa -> roxo
-  ['#7c3aed', '#be185d'], // roxo -> rosa escuro
-  ['#a78bfa', '#4338ca'], // lilás -> índigo
+  ['#7c3aed', '#4c1d95'], 
+  ['#a855f7', '#581c87'], 
+  ['#c026d3', '#6b21a8'], 
+  ['#6366f1', '#3730a3'], 
+  ['#8b5cf6', '#2e1065'], 
+  ['#d946ef', '#7e22ce'], 
+  ['#9333ea', '#312e81'], 
+  ['#ec4899', '#6d28d9'], 
+  ['#7c3aed', '#be185d'], 
+  ['#a78bfa', '#4338ca'], 
 ];
 
 const padroes = ['circulos', 'ondas', 'listras', 'estrelas', 'losangos', 'montanhas'];
@@ -21,7 +19,7 @@ export function novaSeed() {
   return Math.floor(Math.random() * 1000000000);
 }
 
-// transforma o id do livro num número (para livros antigos que não têm seed)
+
 export function seedDoTexto(texto) {
   let h = 0;
   for (let i = 0; i < texto.length; i++) {
@@ -30,7 +28,7 @@ export function seedDoTexto(texto) {
   return h;
 }
 
-// gerador de números "aleatórios" que sempre repete a mesma sequência para a mesma seed
+
 function criarSorteio(seed) {
   let a = seed >>> 0;
   return function () {
@@ -42,7 +40,7 @@ function criarSorteio(seed) {
   };
 }
 
-// devolve o desenho da capa: cores, ângulo do degradê, padrão e as formas
+
 export function gerarCapa(seed) {
   const sorteio = criarSorteio(seed);
   const paleta = paletas[Math.floor(sorteio() * paletas.length)];
@@ -133,7 +131,7 @@ export function gerarCapa(seed) {
     }
   }
 
-  // uma "lua"/sol grande no cantinho dá mais personalidade para todas as capas
+
   const luaX = 40 + sorteio() * 120;
   const luaY = 40 + sorteio() * 40;
 

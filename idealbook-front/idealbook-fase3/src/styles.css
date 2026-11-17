@@ -1,6 +1,4 @@
-/* =========================================================
-   Ideal Book — visual jovem em tons de roxo
-   ========================================================= */
+
 :root {
   --roxo-950: #1e0b45;
   --roxo-900: #2e1065;
@@ -222,7 +220,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .destaque p { position: relative; color: var(--roxo-100); max-width: 640px; margin: 0 auto; font-size: 16px; line-height: 1.6; }
 .destaque .botao-branco { position: relative; }
 
-/* ===== Páginas em geral ===== */
+
 .pagina { min-height: calc(100vh - 150px); padding: 50px 10%; }
 .pagina.larga { padding-left: 7%; padding-right: 7%; }
 .pagina.larga > .box { max-width: 1000px; }
@@ -249,7 +247,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .autor { color: var(--cor-texto-suave); margin: 4px 0 10px; }
 .carregando { font-size: 20px; margin: 30px 0; }
 
-/* ===== Biblioteca (filtros) ===== */
+
 .filtros { display: flex; gap: 12px; max-width: 800px; margin: 0 auto 10px; }
 .filtros input, .filtros select {
   border: 2px solid var(--cor-borda); border-radius: 999px; padding: 14px 20px; font-size: 15px; background: #fff; color: var(--cor-texto);
@@ -259,7 +257,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .filtros input { flex: 1; min-width: 0; }
 .contagem { text-align: center; color: var(--cor-texto-suave); font-size: 14px; font-weight: 700; margin: 14px 0 24px; }
 
-/* ===== Formulários ===== */
+
 .form { display: flex; flex-direction: column; gap: 16px; margin-top: 22px; }
 .campo { display: flex; flex-direction: column; gap: 5px; }
 .form input, .form textarea, .form select {
@@ -283,7 +281,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .linha-botoes { display: flex; gap: 10px; flex-wrap: wrap; justify-content: inherit; }
 .centro .linha-botoes { justify-content: center; margin-top: 20px; }
 
-/* ===== Cadastro / Login ===== */
 .auth-pagina { display: flex; align-items: center; justify-content: center; }
 .auth { display: grid; grid-template-columns: 1fr 500px; gap: 0; max-width: 1060px; width: 100%; margin: 0 auto; }
 .auth .form-box { max-width: none; margin: 0; border-radius: 0 32px 32px 0; box-shadow: var(--sombra-media); }
@@ -319,7 +316,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .papel strong { font-family: var(--fonte-titulo); font-size: 16px; }
 .papel-texto { font-size: 12.5px; line-height: 1.4; color: var(--cor-texto-suave); }
 
-/* ===== Listas (histórico / meus livros) ===== */
+
 .lista { max-width: 900px; margin: 0 auto; }
 .item-lista { display: flex; align-items: center; gap: 20px; padding: 18px; margin-bottom: 14px; border-radius: 24px; }
 .capa-mini { width: 70px; flex-shrink: 0; }
@@ -331,7 +328,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .progresso { height: 10px; background: var(--roxo-100); border-radius: 999px; overflow: hidden; margin: 10px 0; }
 .progresso-barra { height: 100%; background: var(--gradiente); border-radius: 999px; transition: width var(--transicao); }
 
-/* ===== Leitor ===== */
+
 .leitor-topo { display: flex; gap: 28px; align-items: flex-start; }
 .leitor-topo h1 { font-size: 34px !important; margin: 0 0 4px !important; }
 .leitor-topo p { font-size: 16px; line-height: 1.6; }
@@ -351,7 +348,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .leitor-nav { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; color: var(--cor-texto-suave); font-weight: 800; }
 .leitor .progresso { max-width: 900px; margin: 0 auto 14px; }
 
-/* ===== Editor ===== */
+
 .editor-info { display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: start; }
 .editor-info .form { margin-top: 0; }
 .editor-capa { display: flex; flex-direction: column; gap: 10px; }
@@ -367,7 +364,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .form textarea.editor-texto { min-height: 340px; font-family: var(--fonte-livro); line-height: 1.7; }
 .editor-topo .tag { margin: 0 0 6px; }
 
-/* ===== Contato ===== */
+
 .contato-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 10px; }
 .info { flex: 1 1 300px; max-width: 340px; background: var(--gradiente-escuro); border-radius: 28px; padding: 32px; }
 .info h2 { color: #fff; font-size: 22px; margin: 0 0 20px; }
@@ -379,7 +376,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .rodape-texto { color: #fff; font-size: 13px; margin: 0 0 4px; }
 .rodape-creditos { color: var(--roxo-300); font-size: 12px; margin: 0; letter-spacing: 0.5px; }
 
-/* ===== Responsividade ===== */
 @media (max-width: 1150px) {
   .desktop { display: none !important; }
   .hamb { display: block; }

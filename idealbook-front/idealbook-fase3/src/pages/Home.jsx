@@ -4,7 +4,7 @@ import CardLivro from '../components/CardLivro.jsx';
 import Capa from '../components/Capa.jsx';
 import { pegarLivrosPublicados } from '../storage.js';
 
-// capas sorteadas que enfeitam o topo da home
+
 const capasHero = [
   { id: 'h1', titulo: 'Sua história', autor: 'Ideal Book', capaSeed: 4821 },
   { id: 'h2', titulo: 'Novos mundos', autor: 'Ideal Book', capaSeed: 777 },

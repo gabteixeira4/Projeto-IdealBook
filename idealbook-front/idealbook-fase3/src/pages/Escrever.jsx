@@ -5,7 +5,7 @@ import { novaSeed } from '../capas.js';
 
 const generos = ['Romance', 'Fantasia', 'Ficção', 'Terror', 'Aventura', 'Drama', 'Poesia', 'Outro'];
 
-// Página "Meus livros": lista os livros do autor e deixa criar um novo
+
 function Escrever({ usuario, irPara }) {
   const [meusLivros, setMeusLivros] = useState(
     pegarLivrosDosAutores().filter((l) => l.autorEmail === usuario.email)
@@ -24,7 +24,7 @@ function Escrever({ usuario, irPara }) {
       return;
     }
 
-    // estrutura inicial do livro
+
     const novo = {
       id: 'u' + Date.now(),
       titulo: titulo.trim(),
@@ -32,7 +32,7 @@ function Escrever({ usuario, irPara }) {
       autorEmail: usuario.email,
       genero: genero,
       sinopse: sinopse.trim(),
-      capaSeed: novaSeed(), // capa sorteada na hora de criar o livro
+      capaSeed: novaSeed(), 
       capitulos: [],
       publicado: false,
     };
@@ -41,7 +41,7 @@ function Escrever({ usuario, irPara }) {
     todos.push(novo);
     gravar('ib_livros_autores', todos);
 
-    // vai direto pro editor pra começar a escrever
+   
     irPara('editor', novo.id);
   }
 

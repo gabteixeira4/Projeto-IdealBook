@@ -5,7 +5,7 @@ import { pegarSalvos, acharLivro, podeVerLivro } from '../storage.js';
 function Salvos({ usuario, irPara }) {
   const [ids, setIds] = useState(pegarSalvos(usuario.email));
 
-  // quando tira um livro dos salvos, atualiza a lista na tela
+ 
   function atualizar() {
     setIds(pegarSalvos(usuario.email));
   }

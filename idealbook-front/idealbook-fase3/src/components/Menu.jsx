@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-// itens que aparecem conforme o tipo de conta
+
 const itensLeitor = [
   { pagina: 'home', texto: 'Home', emoji: '🏠' },
   { pagina: 'biblioteca', texto: 'Biblioteca', emoji: '📚' },
@@ -13,12 +13,11 @@ const itensFinais = [
   { pagina: 'contato', texto: 'Contato', emoji: '✉️' },
 ];
 
-// Menu: no desktop fica uma barra em cima, no celular vira hambúrguer
-// que abre uma sidebar na esquerda (o CSS troca entre os dois).
+
 function Menu({ pagina, usuario, irPara, sair }) {
   const [aberto, setAberto] = useState(false);
 
-  // quem não tem conta só vê Sobre e Contato; escritor ganha o item "Escrever"
+ 
   let itens = itensFinais;
   if (usuario) {
     const base = usuario.papel === 'escritor' ? [...itensLeitor, itemEscrever] : itensLeitor;
@@ -30,7 +29,7 @@ function Menu({ pagina, usuario, irPara, sair }) {
     setAberto(false);
   }
 
-  // deixa o botão certo "ativo" mesmo quando está numa página interna
+ 
   function estaAtivo(nome) {
     if (nome === 'biblioteca' && pagina === 'leitor') return true;
     if (nome === 'escrever' && pagina === 'editor') return true;

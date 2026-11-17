@@ -7,7 +7,7 @@ function CardLivro({ livro, usuario, irPara, aoMudarSalvo }) {
 
   function clicouSalvar() {
     if (!usuario) {
-      // precisa estar logado pra salvar
+     
       irPara('login');
       return;
     }

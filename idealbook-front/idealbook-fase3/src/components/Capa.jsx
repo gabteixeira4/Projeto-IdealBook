@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { gerarCapa, seedDoTexto } from '../capas.js';
 
-// Desenha uma capa sorteada (SVG) com o título e o autor por cima.
+
 function CapaGerada({ livro }) {
   const seed = livro.capaSeed !== undefined ? livro.capaSeed : seedDoTexto(livro.id || livro.titulo);
   const capa = gerarCapa(seed);
@@ -49,8 +49,7 @@ function CapaGerada({ livro }) {
   );
 }
 
-// Mostra a capa do livro. Livros da biblioteca tentam o Open Library pelo ISBN;
-// se não achar (ou se o livro foi escrito por um usuário) mostra uma capa sorteada.
+
 function Capa({ livro, tamanho }) {
   const [tentativa, setTentativa] = useState(0);
   const isbns = livro.isbns || [];

@@ -3,7 +3,7 @@ import Capa from '../components/Capa.jsx';
 import { pegarLivrosDosAutores, gravar } from '../storage.js';
 import { novaSeed } from '../capas.js';
 
-// Editor do livro: criar, editar, organizar capítulos e publicar
+
 function Editor({ livroId, usuario, irPara }) {
   const livroInicial = pegarLivrosDosAutores().find((l) => l.id === livroId);
 
@@ -22,7 +22,7 @@ function Editor({ livroId, usuario, irPara }) {
   const [mensagem, setMensagem] = useState('');
   const [problemas, setProblemas] = useState([]);
 
-  // só o dono do livro pode editar
+
   if (!livro || livro.autorEmail !== usuario.email) {
     return (
       <main className="pagina">
@@ -36,7 +36,7 @@ function Editor({ livroId, usuario, irPara }) {
     );
   }
 
-  // salva o livro inteiro de volta na lista do localStorage
+
   function salvarLivro(livroNovo) {
     const todos = pegarLivrosDosAutores().map((l) => (l.id === livroNovo.id ? livroNovo : l));
     gravar('ib_livros_autores', todos);
@@ -128,7 +128,7 @@ function Editor({ livroId, usuario, irPara }) {
     }
   }
 
-  // troca o capítulo de lugar com o vizinho (direcao = -1 sobe, +1 desce)
+ 
   function mover(indice, direcao) {
     const destino = indice + direcao;
     if (destino < 0 || destino >= livro.capitulos.length) {
@@ -140,7 +140,7 @@ function Editor({ livroId, usuario, irPara }) {
     capitulos[destino] = guardado;
     salvarLivro({ ...livro, capitulos: capitulos });
 
-    // o capítulo que estava selecionado acompanha a troca
+   
     if (selecionado === indice) {
       setSelecionado(destino);
     } else if (selecionado === destino) {
@@ -148,7 +148,7 @@ function Editor({ livroId, usuario, irPara }) {
     }
   }
 
-  // valida os dados antes de publicar
+  
   function publicar() {
     const lista = [];
     if (livro.titulo.trim().length < 2) {

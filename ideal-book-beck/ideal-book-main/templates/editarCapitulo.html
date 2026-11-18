@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Editar Capítulo — Ideal Book{% endblock %}
+
+{% block content %}
+<main class="pagina larga">
+  <a class="voltar" href="{{ url_for('menuLivro', idLivro=capitulo.idLivro) }}">← Voltar para a obra</a>
+
+  <section class="box">
+    <p class="tag">EDITANDO CAPÍTULO</p>
+    <h1 style="font-size: 32px; margin: 10px 0 20px;">Editar <span>capítulo</span></h1>
+
+    {% if sucesso %}
+      <div class="alerta-sucesso">{{ sucesso }}</div>
+    {% endif %}
+    {% if erro %}
+      <div class="alerta-erro">{{ erro }}</div>
+    {% endif %}
+
+    <form class="form" method="POST">
+      <div class="campo">
+        <label class="label-form" for="titulo">Título do capítulo</label>
+        <input type="text" id="titulo" name="titulo" value="{{ capitulo.titulo }}" required />
+      </div>
+
+      <div class="campo">
+        <label class="label-form" for="conteudo">Conteúdo</label>
+        <textarea
+          class="editor-texto"
+          id="conteudo"
+          name="conteudo"
+          oninput="atualizarContagem(this)"
+          required
+        >{{ capitulo.conteudo }}</textarea>
+        <span class="pequeno-texto" id="contagemPalavras">0 palavras</span>
+      </div>
+
+      <div class="linha-botoes">
+        <button type="submit" class="botao">💾 Salvar alterações</button>
+        <a class="botao-claro" href="{{ url_for('menuLivro', idLivro=capitulo.idLivro) }}">Voltar</a>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function atualizarContagem(textarea) {
+    const texto = textarea.value.trim();
+    const palavras = texto === '' ? 0 : texto.split(/\s+/).length;
+    document.getElementById('contagemPalavras').textContent = palavras + (palavras === 1 ? ' palavra' : ' palavras');
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    atualizarContagem(document.getElementById('conteudo'));
+  });
+</script>
+{% endblock %}

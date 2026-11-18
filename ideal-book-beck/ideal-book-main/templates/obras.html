@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Minhas Obras — Ideal Book{% endblock %}
+
+{% block content %}
+<main class="pagina">
+  <section class="topo-pagina">
+    <p class="tag">ÁREA DO AUTOR</p>
+    <h1>Minhas <span>obras</span></h1>
+    <p>Crie seus livros, gerencie os capítulos e acompanhe suas histórias.</p>
+  </section>
+
+  {% if erro %}
+    <div class="alerta-erro" style="max-width: 900px; margin: 0 auto 20px;">{{ erro }}</div>
+  {% endif %}
+  {% if sucesso %}
+    <div class="alerta-sucesso" style="max-width: 900px; margin: 0 auto 20px;">{{ sucesso }}</div>
+  {% endif %}
+
+  <p class="centro" style="margin-bottom: 28px;">
+    <a class="botao grande" href="{{ url_for('renderCadastrarLivro') }}">✍️ Cadastrar novo livro</a>
+  </p>
+
+  {% if livros %}
+    <div class="lista">
+      {% for livro in livros %}
+        <div class="item-lista box">
+          <div class="capa-mini">
+            <div class="capa">
+              <img src="{{ url_capa(livro.caminhoImagem) }}" alt="Capa de {{ livro.titulo }}" />
+            </div>
+          </div>
+          <div class="item-info">
+            <h3>{{ livro.titulo }}</h3>
+            <p class="autor">{{ livro.autor }}</p>
+            <p class="pequeno-texto">{{ livro.descricao }}</p>
+          </div>
+          <div class="item-botoes">
+            <a class="botao" href="{{ url_for('menuLivro', idLivro=livro.id) }}">Gerenciar</a>
+            <a
+              class="botao-perigo"
+              href="{{ url_for('deleterLivroId', idLivro=livro.id) }}"
+              onclick="return confirm('Tem certeza que quer excluir esse livro? Não dá para desfazer.');"
+            >
+              Excluir
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="vazio">
+      <p>Você ainda não cadastrou nenhum livro.</p>
+    </div>
+  {% endif %}
+</main>
+{% endblock %}

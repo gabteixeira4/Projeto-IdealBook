@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}{{ livro.titulo }} — Ideal Book{% endblock %}
+
+{% block content %}
+<main class="pagina leitor">
+  <a class="voltar" href="{{ url_for('biblioteca') }}">← Voltar para a biblioteca</a>
+
+  <section class="leitor-topo box">
+    <div class="capa-pequena">
+      <div class="capa">
+        <img src="{{ url_capa(livro.caminhoImagem) }}" alt="Capa de {{ livro.titulo }}" />
+      </div>
+    </div>
+    <div>
+      <h1>{{ livro.titulo }}</h1>
+      <p class="autor">por {{ livro.autor }}</p>
+      <p>{{ livro.descricao }}</p>
+      <div class="linha-botoes" style="margin-top: 16px;">
+        <form action="{{ url_for('favoritar', idLivro=livro.id) }}" method="POST" onsubmit="alternarFavorito(this, event)">
+          <button
+            type="submit"
+            class="botao-claro"
+            data-texto-salvo="★ Salvo nos favoritos"
+            data-texto-salvar="☆ Salvar nos favoritos"
+          >
+            {{ '★ Salvo nos favoritos' if is_favorito else '☆ Salvar nos favoritos' }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="box">
+    <p class="tag">SUMÁRIO</p>
+    <h2 style="margin-top: 8px;">Capítulos</h2>
+
+    {% if capitulos %}
+      <ul class="lista-cap">
+        {% for capitulo in capitulos %}
+          <li>
+            <span class="cap-nome">{{ loop.index }}. {{ capitulo.titulo }}</span>
+            <a class="botao pequeno" href="{{ url_for('lerCapitulo', idCapitulo=capitulo.idCapitulo) }}">Ler</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="vazio">
+        <p>Este livro ainda não possui capítulos publicados.</p>
+      </div>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}

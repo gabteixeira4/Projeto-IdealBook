@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ capitulo.titulo }} — Ideal Book{% endblock %}
+
+{% block content %}
+<main class="pagina leitor">
+  <a class="voltar" href="{{ url_for('lerLivro', id=capitulo.idLivro) }}">← Voltar para o livro</a>
+
+  <section class="ferramentas">
+    <div></div>
+    <div>
+      <button type="button" class="botao-claro pequeno" onclick="mudarFonte(-2)" aria-label="Diminuir letra">A-</button>
+      <button type="button" class="botao-claro pequeno" onclick="mudarFonte(2)" aria-label="Aumentar letra">A+</button>
+    </div>
+  </section>
+
+  <article class="folha box">
+    <p class="tag">LEITURA</p>
+    <h2>{{ capitulo.titulo }}</h2>
+    <div class="texto-livro" id="textoLivro" style="font-size: 18px; white-space: pre-line;">
+      {{ capitulo.conteudo }}
+    </div>
+  </article>
+
+  <div class="leitor-nav">
+    <a class="botao-claro" href="{{ url_for('lerLivro', id=capitulo.idLivro) }}">← Capítulos</a>
+    <a class="botao" href="{{ url_for('biblioteca') }}">Biblioteca</a>
+  </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  let tamanhoAtual = 18;
+  function mudarFonte(delta) {
+    tamanhoAtual = Math.min(28, Math.max(14, tamanhoAtual + delta));
+    document.getElementById('textoLivro').style.fontSize = tamanhoAtual + 'px';
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Biblioteca — Ideal Book{% endblock %}
+
+{% block content %}
+<main class="pagina larga">
+  <section class="topo-pagina">
+    <p class="tag">BIBLIOTECA</p>
+    <h1>Todos os <span>livros</span></h1>
+    <p>Escolha um livro para ler, salve nos favoritos ou pesquise pelo título ou autor.</p>
+  </section>
+
+  <form class="filtros" action="{{ url_for('biblioteca') }}" method="GET">
+    <input
+      type="text"
+      name="q"
+      id="filtroBusca"
+      value="{{ busca or '' }}"
+      placeholder="🔎 Pesquisar por título ou autor..."
+      aria-label="Pesquisar livros"
+    />
+    <button type="submit" class="botao">Buscar</button>
+  </form>
+
+  <p class="contagem" id="contagemLivros">
+    {{ livros|length }} {{ 'livro encontrado' if livros|length == 1 else 'livros encontrados' }}
+  </p>
+
+  {% if livros %}
+    <div class="cards" id="gridLivros">
+      {% for livro in livros %}
+        <article class="card" data-texto="{{ (livro.titulo ~ ' ' ~ livro.autor)|lower }}">
+          <div class="capa-card">
+            <div class="capa">
+              <img src="{{ url_capa(livro.caminhoImagem) }}" alt="Capa de {{ livro.titulo }}" />
+            </div>
+          </div>
+          <h3>{{ livro.titulo }}</h3>
+          <p>{{ livro.autor }}</p>
+          <p class="card-desc" id="desc-{{ livro.id }}">{{ livro.descricao }}</p>
+          <button type="button" class="btn-desc-toggle" id="btn-desc-{{ livro.id }}" style="display: none;" onclick="toggleDesc('{{ livro.id }}')">
+            Mostrar mais
+          </button>
+          <div class="card-botoes">
+            <a class="botao" href="{{ url_for('lerLivro', id=livro.id) }}">Ler</a>
+            <form class="form-fav" action="{{ url_for('favoritar', idLivro=livro.id) }}" method="POST" onsubmit="alternarFavorito(this, event)">
+              <button type="submit" class="botao-claro" data-texto-salvo="★ Salvo" data-texto-salvar="☆ Salvar">
+                {{ '★ Salvo' if livro.id in favoritos_ids else '☆ Salvar' }}
+              </button>
+            </form>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="vazio">
+      <p>Nenhum livro encontrado 😕</p>
+      {% if busca %}
+        <a class="botao-claro" href="{{ url_for('biblioteca') }}">Limpar filtros</a>
+      {% endif %}
+    </div>
+  {% endif %}
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.card-desc').forEach(desc => {
+      if (desc.scrollHeight > desc.clientHeight + 2) {
+        const id = desc.id.replace('desc-', '');
+        const btn = document.getElementById('btn-desc-' + id);
+        if (btn) btn.style.display = 'inline-block';
+      }
+    });
+
+    const input = document.getElementById('filtroBusca');
+    const contagem = document.getElementById('contagemLivros');
+    if (input) {
+      input.addEventListener('input', () => {
+        const termo = input.value.trim().toLowerCase();
+        let visiveis = 0;
+        document.querySelectorAll('#gridLivros .card').forEach(card => {
+          const bate = card.dataset.texto.includes(termo);
+          card.style.display = bate ? 'flex' : 'none';
+          if (bate) visiveis++;
+        });
+        if (contagem) {
+          contagem.textContent = visiveis + (visiveis === 1 ? ' livro encontrado' : ' livros encontrados');
+        }
+      });
+    }
+  });
+
+  function toggleDesc(id) {
+    const desc = document.getElementById('desc-' + id);
+    const btn = document.getElementById('btn-desc-' + id);
+    desc.classList.toggle('expandida');
+    btn.textContent = desc.classList.contains('expandida') ? 'Mostrar menos' : 'Mostrar mais';
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Login — Ideal Book{% endblock %}
+
+{% block content %}
+<main class="pagina auth-pagina">
+  <div class="auth">
+    <aside class="painel-auth">
+      <div class="painel-capas" aria-hidden="true">
+        <div class="mini-livro m1">
+          <div class="capa">
+            <div class="capa-falsa" style="background: linear-gradient(155deg, #6d28d9, #c026d3);">
+              <strong>Sua história</strong>
+              <span>Ideal Book</span>
+            </div>
+          </div>
+        </div>
+        <div class="mini-livro m2">
+          <div class="capa">
+            <div class="capa-falsa" style="background: linear-gradient(155deg, #4c1d95, #7c3aed);">
+              <strong>Novos mundos</strong>
+              <span>Ideal Book</span>
+            </div>
+          </div>
+        </div>
+        <div class="mini-livro m3">
+          <div class="capa">
+            <div class="capa-falsa" style="background: linear-gradient(155deg, #7c3aed, #d946ef);">
+              <strong>Capítulo 1</strong>
+              <span>Ideal Book</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2>Que bom te ver de novo!</h2>
+      <p>Entre na sua conta para continuar sua leitura ou voltar a escrever.</p>
+    </aside>
+
+    <div class="box form-box">
+      <p class="tag">LOGIN</p>
+      <h1>Entrar na <span>conta</span></h1>
+
+      {% if erro %}
+        <div class="alerta-erro">{{ erro }}</div>
+      {% endif %}
+
+      <form class="form" action="/Login" method="POST">
+        <div class="campo">
+          <input type="email" name="email" placeholder="Seu e-mail" aria-label="Seu e-mail" required />
+        </div>
+        <div class="campo">
+          <input type="password" name="senha" placeholder="Sua senha" aria-label="Sua senha" required />
+        </div>
+        <button type="submit" class="botao grande">Entrar</button>
+      </form>
+
+      <p class="troca">
+        Ainda não tem conta?
+        <a class="link" href="{{ url_for('renderCadastro') }}">Cadastre-se</a>
+      </p>
+    </div>
+  </div>
+</main>
+{% endblock %}

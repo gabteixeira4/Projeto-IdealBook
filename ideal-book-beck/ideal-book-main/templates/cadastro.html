@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Cadastro — Ideal Book{% endblock %}
+
+{% block content %}
+<main class="pagina auth-pagina">
+  <div class="auth">
+    <aside class="painel-auth">
+      <div class="painel-capas" aria-hidden="true">
+        <div class="mini-livro m1">
+          <div class="capa">
+            <div class="capa-falsa" style="background: linear-gradient(155deg, #6d28d9, #c026d3);">
+              <strong>Sua história</strong>
+              <span>Ideal Book</span>
+            </div>
+          </div>
+        </div>
+        <div class="mini-livro m2">
+          <div class="capa">
+            <div class="capa-falsa" style="background: linear-gradient(155deg, #4c1d95, #7c3aed);">
+              <strong>Novos mundos</strong>
+              <span>Ideal Book</span>
+            </div>
+          </div>
+        </div>
+        <div class="mini-livro m3">
+          <div class="capa">
+            <div class="capa-falsa" style="background: linear-gradient(155deg, #7c3aed, #d946ef);">
+              <strong>Capítulo 1</strong>
+              <span>Ideal Book</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2>Sua próxima história começa aqui</h2>
+      <p>Crie sua conta em menos de um minuto e escolha como quer viver o Ideal Book.</p>
+      <ul>
+        <li>📚 Biblioteca cheia de livros</li>
+        <li>⭐ Salve favoritos para ler depois</li>
+        <li>✍️ Escreva e publique as suas histórias</li>
+      </ul>
+    </aside>
+
+    <div class="box form-box">
+      <p class="tag">CADASTRO</p>
+      <h1>Criar <span>conta</span></h1>
+
+      {% if erro %}
+        <div class="alerta-erro">{{ erro }}</div>
+      {% endif %}
+
+      <form class="form" action="/Cadastro" method="POST">
+        <div class="campo">
+          <p class="label-form">Eu sou...</p>
+          <input type="hidden" name="tipoUsuario" id="tipoUsuarioInput" value="leitor" />
+          <div class="papeis" role="radiogroup" aria-label="Tipo de conta">
+            <button type="button" class="papel escolhido" data-papel="leitor" onclick="selecionarPapel('leitor', this)">
+              <span class="papel-emoji">📖</span>
+              <strong>Leitor</strong>
+              <span class="papel-texto">Explore a biblioteca, leia e salve seus livros favoritos.</span>
+            </button>
+            <button type="button" class="papel" data-papel="escritor" onclick="selecionarPapel('escritor', this)">
+              <span class="papel-emoji">✍️</span>
+              <strong>Escritor</strong>
+              <span class="papel-texto">Faz tudo que o leitor faz e também escreve e publica livros.</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="campo">
+          <input type="text" name="nome" placeholder="Seu nome" aria-label="Seu nome" required />
+        </div>
+        <div class="campo">
+          <input type="email" name="email" placeholder="Seu e-mail" aria-label="Seu e-mail" required />
+        </div>
+        <div class="campo">
+          <input type="password" name="senha" placeholder="Senha" aria-label="Senha" required />
+        </div>
+        <div class="campo">
+          <input type="password" name="confirmarSenha" placeholder="Confirme a senha" aria-label="Confirme a senha" required />
+        </div>
+
+        <button type="submit" class="botao grande">Cadastrar</button>
+      </form>
+
+      <p class="troca">
+        Já tem conta?
+        <a class="link" href="{{ url_for('renderLogin') }}">Entrar</a>
+      </p>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function selecionarPapel(papel, btn) {
+    document.getElementById('tipoUsuarioInput').value = papel;
+    document.querySelectorAll('.papel').forEach(el => el.classList.remove('escolhido'));
+    btn.classList.add('escolhido');
+  }
+</script>
+{% endblock %}

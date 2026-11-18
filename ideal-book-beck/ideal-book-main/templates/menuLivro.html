@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Capítulos — {{ livro.titulo }}{% endblock %}
+
+{% block content %}
+<main class="pagina larga">
+  <a class="voltar" href="{{ url_for('obras') }}">← Minhas obras</a>
+
+  {% if sucessoDelete %}
+    <div class="alerta-sucesso" style="max-width: 1000px; margin: 0 auto 20px;">{{ sucessoDelete }}</div>
+  {% endif %}
+  {% if erroDelete %}
+    <div class="alerta-erro" style="max-width: 1000px; margin: 0 auto 20px;">{{ erroDelete }}</div>
+  {% endif %}
+
+  <section class="box">
+    <div class="editor-topo">
+      <p class="tag">EDITANDO OBRA</p>
+    </div>
+    <div class="editor-info">
+      <div class="editor-capa">
+        <div class="capa">
+          <img src="{{ url_capa(livro.caminhoImagem) }}" alt="Capa de {{ livro.titulo }}" />
+        </div>
+      </div>
+      <div>
+        <h1 style="font-size: 32px; margin: 0 0 6px;">{{ livro.titulo }}</h1>
+        <p class="autor">por {{ livro.autor }}</p>
+        <p>{{ livro.descricao }}</p>
+        <div class="linha-botoes" style="margin-top: 16px;">
+          <a class="botao" href="{{ url_for('addCapitulo', idLivro=livro.id) }}">+ Novo capítulo</a>
+          <a class="botao-claro" href="{{ url_for('lerLivro', id=livro.id) }}">👁 Pré-visualizar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="box">
+    <h3>Capítulos</h3>
+    {% if capitulos %}
+      <ul class="lista-cap">
+        {% for capitulo in capitulos %}
+          <li>
+            <span class="cap-nome">{{ loop.index }}. {{ capitulo.titulo }}</span>
+            <div class="item-botoes">
+              <a class="botao-claro pequeno" href="{{ url_for('editarCapitulo', idCapitulo=capitulo.idCapitulo) }}">Editar</a>
+              <a
+                class="botao-perigo pequeno"
+                href="{{ url_for('deletarCapituloId', idCapitulo=capitulo.idCapitulo) }}"
+                onclick="return confirm('Tem certeza que quer excluir este capítulo?');"
+              >
+                Excluir
+              </a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="vazio">
+        <p>Nenhum capítulo cadastrado ainda.</p>
+      </div>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}
